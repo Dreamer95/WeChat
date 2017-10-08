@@ -50,5 +50,6 @@ $(document).ready(function(){
     //khi user nhấn nút send
     $("#btnSendMessage").click(function(){
         socket.emit("User-send-messages",$("#txtMessages").val());
+        $("#txtMessages").html("");
     });
 });
