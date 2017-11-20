@@ -4,8 +4,13 @@
         <meta charset="utf-8">
         <script src="jquery.js"></script>
         <script src="https://dongchat.herokuapp.com/socket.io/socket.io.js"></script>
+        <!-- <script src="process.js"></script>         -->
+        <script src="peer.js"></script>
         <script src="process.js"></script>
+        <!-- <script src="http://cdn.peerjs.com/0.3/peer.min.js"></script> -->
         <link rel="stylesheet" type="text/css" href="layout.css"/>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- <script src="webrtc.js"></script> -->
 
     </head>
 
@@ -20,7 +25,10 @@
             <div id="chatForm">
                 <div id="left">
                     <div id="boxUsers">Users Online</div>
-                    <div id="boxContent"></div>
+                    <ul id="boxContent">
+
+                    </ul>
+                    <!-- <div id="boxContent"></div> -->
                 </div>
 
                 <div id="right">
@@ -33,6 +41,23 @@
                         <input type="text" id="txtMessages"/>
                         <input type="button" id="btnSendMessage" value="Send" />
                     </div>
+                    <h3 id="my-peer">Your id: </h3>
+
+                
+
+                <div id="video">
+                    
+                    <div class="row">
+                        <video id="localStream" width="300" controls></video>
+                        <video id="remoteStream" width="300" controls></video>
+                    </div>
+                    
+                    <input type="text" id="remoteId" placeholder="Remote Id">
+                    <button id="btnCall">Call</button>
+                </div>
+            </div>
+                <div id = "option">
+                    <a href="/dong" id="clickMe">Click Me</a>
                 </div>
             </div>
         </div>

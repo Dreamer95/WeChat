@@ -1,5 +1,6 @@
 body{background-color: blanchedalmond}
-#wrapper{width: 600px ; margin: auto; color: blue}
+#wrapper{width: 1000px ; margin: auto; color: blue}
+#video
 #welcome{text-align: center}
 #txtUsername{width:180px ;background-color: transparent; border: solid 1px black}
 #left, #right{min-height: 30px }
@@ -10,3 +11,6 @@ body{background-color: blanchedalmond}
 #sayHi{text-align: right}
 #listMessages{height: 200px; background-color: #2bf292;margin-bottom: 15px}
 #txtMessage{background-color: transparent; border: solid 1px black}
+#information{border: solid 1px gray; margin: 10px;padding: 10px;text-align: center}
+#listUsers{text-align: center}
+#wrapper2{width: 700px;margin: auto}

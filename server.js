@@ -18,6 +18,15 @@ Mỗi 1 client connect tới Server sẽ đc tạo 1 socket với id riêng
 */ 
 //mảng lưu danh sách username
 var arrUsers=[];
+//mảng lưu danh sách học viên gửi về
+var mang = [];
+// tạo class trong js thì dùng function
+function HocVien(hoten,email,phone){
+    this.HOTEN = hoten;
+    this.EMAIL = email;
+    this.SODT = phone;
+};
+
 io.on("connection",function(socket){
     // bắt kết nối
     console.log("Có người kết nối : " + socket.id);
@@ -31,13 +40,23 @@ io.on("connection",function(socket){
     });
     
     socket.on("Client-send-Username",function(data){
-        console.log("user "+socket.id +" đăng ký tên: "+data);
-        if(arrUsers.indexOf(data)>=0){
+        console.log("user "+socket.id +" đăng ký tên: "+data.ten);
+        // if(arrUsers.indexOf(data)>=0){
+        //     //nếu tìm thấy tên trong mảng thì dk thất bại
+        //     socket.emit("server-send-failed-register");
+        // }
+
+        //kiểm tra xem tên ng dùng đăng ký đã tồn tại chưa
+        const isExist = arrUsers.some(function(e){
+            e.ten == data.ten;
+        })
+        if(isExist){
             //nếu tìm thấy tên trong mảng thì dk thất bại
             socket.emit("server-send-failed-register");
-        }else{
+        }
+        else{
             arrUsers.push(data); //add tên của user vào mảng
-            socket.Username = data; // tạo thêm thuộc tính 
+            socket.Username = data.ten; // tạo thêm thuộc tính 
             socket.emit("server-send-success-register",data)
             io.sockets.emit("server-send-list-users",arrUsers);
 
@@ -59,6 +78,22 @@ io.on("connection",function(socket){
         toàn bộ client - truyền chuỗi Json về*/
         io.sockets.emit("Server-send-messages",{userName: socket.Username, conTent: data });
     });
+
+    socket.on("hocvien-gui-thongtin",function(data){
+        //push thông tin sinh viên gửi lên vào mang
+        mang.push (
+            new HocVien(data.hoten,data.email,data.phone)
+        )
+        console.log(data.phone)
+        io.sockets.emit("server-gui-ds",mang)
+    });
+
+    // web rtc
+    socket.on("User-Send-peerID",function(data){
+        console.log(data);
+    })
+
+   
 }); 
 
 //routing trang trả về client
@@ -66,3 +101,7 @@ io.on("connection",function(socket){
 app.get("/",function(request,response){
     response.render("index");
 });
+
+app.get("/dong",function(req,res){
+    res.render("dong")
+})
