@@ -1,5 +1,5 @@
 //var socket = io("http://localhost:3000");
-var socket = io("https://dongchat.herokuapp.com");
+var socket = io("https://ngocdong.herokuapp.com");
 
 //Client lắng nghe các sự kiện server trả về
     socket.on("server-send-failed-register",function(){
